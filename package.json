@@ -1,0 +1,20 @@
+{
+  "name": "prisma-perf",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test-infra-up": "docker-compose -p test -f docker-compose.yml up -d",
+    "test-infra-down": "docker-compose -p test -f docker-compose.yml down",
+    "test-migrate": "npm run test-prisma -- migrate dev --preview-feature",
+    "test-prisma": "dotenv -e .env.test -- npx prisma"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/cli": "^2.16.1",
+    "@prisma/client": "^2.16.1",
+    "dotenv-cli": "^4.0.0",
+    "prisma": "^2.16.1"
+  }
+}

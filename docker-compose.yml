@@ -1,0 +1,14 @@
+version: "3"
+services:
+  prisma-mysql:
+    image: "mariadb:10.5.8"
+    command: "--character-set-server='utf8mb4' --collation-server='utf8mb4_unicode_ci'"
+    ports:
+      - "23306:3306"
+    logging:
+      driver: none
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: spongebob
+      MYSQL_PASSWORD: squarepants
+      MYSQL_DATABASE: chums_dev

@@ -1,0 +1,463 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["nativeTypes", "groupBy"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Lorem {
+  id     String  @id @default(cuid())
+  one    String  @unique @db.VarChar(511)
+  two    String  @db.VarChar(255)
+  three  String? @db.VarChar(255)
+  four   String?
+  five   String? @db.Text
+  six    String? @db.Text
+  elitId String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  elit   Elit?   @relation(fields: [elitId], references: [id])
+  ipsums Ipsum[]
+  dolors Dolor[]
+  sit    Sit?
+}
+
+model Ipsum {
+  id         String       @id @default(cuid())
+  one        String
+  two        DateTime?
+  three      Int?
+  four       Nisi         @default(ABC)
+  five       Boolean
+  six        String?
+  seven      String?      @db.Text
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+  nostrud    Nostrud      @relation(fields: [one], references: [id])
+  elits      Elit[]
+  lorems     Lorem[]
+  dolors     Dolor[]
+  sits       Sit[]
+  consecturs Consectur[]
+  adipiscing Adipiscing[]
+  labores    Labore[]
+  dolores    Dolore[]
+
+}
+
+model Dolor {
+  id        String   @id @default(cuid())
+  one       String?
+  two       String   @map("userId")
+  three     String   @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  elits     Elit[]
+  lorems    Lorem[]
+  ipsum     Ipsum?   @relation(fields: [one], references: [id])
+  nostrud   Nostrud  @relation(fields: [two], references: [id])
+
+  amets   Amet[]
+  dolores Dolore[]
+}
+
+model Sit {
+  id         String       @id @default(cuid())
+  one        String?
+  two        String?
+  three      String?
+  four       String
+  five       String?      @db.VarChar(1024)
+  six        String?
+  createdAt  DateTime     @default(now())
+  elit       Elit?        @relation(fields: [one], references: [id])
+  lorem      Lorem?       @relation(fields: [two], references: [id])
+  ipsum      Ipsum?       @relation(fields: [three], references: [id])
+  adipscings Adipiscing[]
+
+}
+
+model Amet {
+  id        String   @id @default(cuid())
+  one       String
+  two       String
+  three     Aliquip  @default(JKL)
+  four      String?
+  five      String?
+  six       Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  seven     Dolor    @relation(fields: [one], references: [id])
+  eight     Nostrud  @relation(fields: [two], references: [id])
+
+}
+
+model Consectur {
+  id    String   @id @default(cuid())
+  one   String
+  two   String
+  three Aliquip  @default(JKL)
+  four  String?
+  five  String?
+  six   Boolean  @default(false)
+  seven DateTime @default(now())
+  eight DateTime @updatedAt
+  nine  Ipsum    @relation(fields: [one], references: [id])
+  ten   Nostrud  @relation(fields: [two], references: [id])
+
+}
+
+model Adipiscing {
+  id        String   @id @default(cuid())
+  one       String?
+  two       String?
+  three     String
+  createdAt DateTime @default(now())
+  four      Sit?     @relation(fields: [one], references: [id])
+  five      Ipsum?   @relation(fields: [two], references: [id])
+  six       Nostrud  @relation(fields: [three], references: [id])
+
+}
+
+model Elit {
+  id        String    @id @default(cuid())
+  one       String
+  two       String?   @unique
+  three     String?
+  four      String?
+  five      String    @db.VarChar(255)
+  six       String?   @db.Text
+  seven     String?   @db.Text
+  eight     Float     @default(5)
+  nine      Consequat @default(BCD)
+  ten       DateTime?
+  eleven    DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  twelve    Eiusmod[]
+  thirteen  Labore[]
+  fourteen  Tempor[]
+  fifteen   Nostrud[]
+  sixteen   Nostrud   @relation("UserCreatedProducts", fields: [one], references: [id])
+  seventeen Do[]
+  eighteen  Magne[]
+  nineteen  Ipsum[]
+  twenty    Dolor[]
+  twentyone Sit[]
+  twentytwo Lorem[]
+}
+
+model Sed {
+  id    String   @id @default(cuid())
+  one   String   @unique
+  two   String?  @db.Text
+  three String?  @db.Text
+  four  String?  @unique
+  five  Int?     @unique
+  six   DateTime @default(now())
+  seven DateTime @updatedAt
+  eight Do[]
+  nine  Magne[]
+}
+
+model Do {
+  id     String   @id @default(cuid())
+  one    String   @unique
+  two    Duis
+  three  String   @db.Text
+  four   String   @db.Text
+  five   String?  @db.Text
+  six    String
+  seven  String
+  eight  DateTime @default(now())
+  nine   DateTime @updatedAt
+  ten    Elit     @relation(fields: [one], references: [id])
+  eleven Sed      @relation(fields: [six], references: [id])
+
+}
+
+model Eiusmod {
+  id    String   @id @default(cuid())
+  one   String
+  two   String
+  three String   @db.Text
+  four  DateTime @default(now())
+  five  Elit     @relation(fields: [one], references: [id])
+
+}
+
+model Tempor {
+  id    String       @id @default(cuid())
+  one   String
+  two   String
+  three String       @db.Text
+  four  Int
+  five  DateTime?
+  six   DateTime     @default(now())
+  seven DateTime     @updatedAt
+  eight Elit         @relation(fields: [one], references: [id])
+  nine  Incididunt[]
+
+}
+
+model Incididunt {
+  id    String   @id @default(cuid())
+  one   String
+  two   String
+  three String   @db.Text
+  four  DateTime @default(now())
+  five  Tempor   @relation(fields: [one], references: [id])
+
+}
+
+model Ut {
+  id  String    @id @default(cuid())
+  one Voluptate @unique
+  two Nostrud[]
+}
+
+model Labore {
+  id    String    @id @default(cuid())
+  one   String    @unique
+  two   String?
+  three String?   @db.Text
+  four  DateTime  @default(now())
+  five  Ipsum[]
+  six   Elit[]
+  seven Nostrud[]
+
+}
+
+model Dolore {
+  id     String   @id @default(cuid())
+  one    String
+  two    Irure
+  three  Commodo
+  four   String?
+  five   String?
+  six    String
+  seven  DateTime @default(now())
+  eight  Nostrud  @relation("ReactionEntityCreator", fields: [one], references: [id])
+  nine   Nostrud  @relation("ReactionReactor", fields: [six], references: [id])
+  ten    Ipsum?   @relation(fields: [four], references: [id])
+  eleven Dolor?   @relation(fields: [five], references: [id])
+
+  @@unique([one, four, five])
+}
+
+model Magne {
+  id        String   @id @default(cuid())
+  one       Fugiat
+  two       String
+  three     String
+  four      String?
+  five      String
+  six       Cillium
+  seven     String?
+  eight     Int
+  nine      Int
+  ten       Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  eleven    DateTime
+
+  twelve    Nostrud? @relation(fields: [four], references: [id])
+  thirteen  Enim?    @relation(fields: [seven], references: [id])
+  fourteen  Veniam[]
+  fifteen   Sed      @relation(fields: [two], references: [id])
+  sixteen   Elit[]
+  seventeen Aliqua[]
+
+}
+
+model Aliqua {
+  id String @id @default(cuid())
+
+  one   String
+  two   Esse
+  three Int
+  four  DateTime @default(now())
+
+  five Magne @relation(fields: [one], references: [id])
+}
+
+model Enim {
+  id        String   @id @default(cuid())
+  one       String   @unique
+  two       DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  three     Nostrud  @relation(fields: [one], references: [id])
+  four      Magne[]
+}
+
+model Minim {
+  id        String   @id @default(cuid())
+  one       String
+  createdAt DateTime @default(now())
+  two       Velit
+  three     Int
+
+  four Veniam @relation(fields: [one], references: [id])
+}
+
+model Veniam {
+  id        String   @id @default(cuid())
+  one       String
+  two       String
+  three     Int
+  four      Nulla
+  five      String?
+  six       Pariatur
+  seven     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  eight  Nostrud @relation(fields: [one], references: [id])
+  nine   Quis    @relation(fields: [two], references: [id])
+  ten    Magne?  @relation(fields: [five], references: [id])
+  eleven Minim[]
+}
+
+model Quis {
+  id        String   @id @default(cuid())
+  one       String   @unique
+  two       Int      @default(0)
+  three     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  four Nostrud  @relation(fields: [one], references: [id])
+  five Veniam[]
+}
+
+model Nostrud {
+  id          String       @id @default(cuid())
+  one         String
+  two         String
+  three       String       @unique
+  four        String
+  sive        String       @unique
+  six         Aute?
+  seven       String?
+  eight       Int          @default(0)
+  nine        String?      @db.Text
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  ten         String?
+  eleven      Ipsum[]
+  twelve      Dolor[]
+  thirteen    Dolore[]     @relation("ReactionReactor")
+  fourteen    Dolore[]     @relation("ReactionEntityCreator")
+  fifteen     Labore[]
+  sixteen     Nostrud[]    @relation("UserFollows", references: [id])
+  seventeen   Nostrud[]    @relation("UserFollows", references: [id])
+  eighteen    Nostrud[]    @relation("UserBlocks", references: [id])
+  nineteen    Nostrud[]    @relation("UserBlocks", references: [id])
+  twenty      Elit[]
+  twentyone   Elit[]       @relation("UserCreatedProducts")
+  twentytwo   Consectur[]
+  twentythree Amet[]
+  twentyfour  Adipiscing[]
+  twentyfive  Ut[]
+
+  twentysix   Enim?
+  twentyseven Magne[]
+  twentyeight Quis?
+  twentynine  Veniam[]
+  thirty      Ullamco?
+
+}
+
+model Ullamco {
+  id    String  @id @default(cuid())
+  one   String
+  two   Int     @unique
+  three String  @unique
+  four  Nostrud @relation(fields: [one], references: [id])
+}
+
+enum Nisi {
+  ABC
+  DEF
+  GHI
+}
+
+enum Aliquip {
+  JKL
+  MNO
+  PQR
+}
+
+enum Commodo {
+  STU
+  VWX
+}
+
+enum Consequat {
+  YZA
+  BCD
+  EFG
+  HIJ
+}
+
+enum Duis {
+  KLM
+  NOP
+  QRS
+}
+
+enum Aute {
+  TUV
+  WXY
+}
+
+enum Irure {
+  ZAB
+  CDE
+  FGH
+  IJK
+  LMN
+}
+
+enum Voluptate {
+  OPQ
+  RST
+  UVW
+}
+
+enum Velit {
+  XYZ
+  ABC
+  DEF
+}
+
+enum Esse {
+  GHI
+  JKL
+  MNO
+}
+
+enum Cillium {
+  PQR
+  STU
+}
+
+enum Fugiat {
+  VWX
+}
+
+enum Nulla {
+  YZA
+  BCD
+  EFG
+}
+
+enum Pariatur {
+  HIJ
+  KLM
+}
